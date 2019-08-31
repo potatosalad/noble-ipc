@@ -1,0 +1,451 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "Broadcast": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "broadcast"
+                    ],
+                    "type": "string"
+                },
+                "broadcast": {
+                    "type": "boolean"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ChracteristicCommandLike": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Command": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/StartScanning"
+                },
+                {
+                    "$ref": "#/definitions/StopScanning"
+                },
+                {
+                    "$ref": "#/definitions/Connect"
+                },
+                {
+                    "$ref": "#/definitions/Disconnect"
+                },
+                {
+                    "$ref": "#/definitions/UpdateRssi"
+                },
+                {
+                    "$ref": "#/definitions/DiscoverServices"
+                },
+                {
+                    "$ref": "#/definitions/DiscoverIncludedServices"
+                },
+                {
+                    "$ref": "#/definitions/DiscoverCharacteristics"
+                },
+                {
+                    "$ref": "#/definitions/Read"
+                },
+                {
+                    "$ref": "#/definitions/Write"
+                },
+                {
+                    "$ref": "#/definitions/Broadcast"
+                },
+                {
+                    "$ref": "#/definitions/Notify"
+                },
+                {
+                    "$ref": "#/definitions/DiscoverDescriptors"
+                },
+                {
+                    "$ref": "#/definitions/ReadValue"
+                },
+                {
+                    "$ref": "#/definitions/WriteValue"
+                },
+                {
+                    "$ref": "#/definitions/ReadHandle"
+                },
+                {
+                    "$ref": "#/definitions/WriteHandle"
+                }
+            ]
+        },
+        "Connect": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "connect"
+                    ],
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DescriptorCommandLike": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "descriptorUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Disconnect": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "disconnect"
+                    ],
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoverCharacteristics": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "discoverCharacteristics"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoverDescriptors": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "discoverDescriptors"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoverIncludedServices": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "discoverIncludedServices"
+                    ],
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "serviceUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoverServices": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "discoverServices"
+                    ],
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Notify": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "notify"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "notify": {
+                    "type": "boolean"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PeripheralCommandLike": {
+            "properties": {
+                "peripheralUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Read": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "read"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ReadHandle": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "readHandle"
+                    ],
+                    "type": "string"
+                },
+                "handle": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ReadValue": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "readValue"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "descriptorUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ServiceCommandLike": {
+            "properties": {
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StartScanning": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "startScanning"
+                    ],
+                    "type": "string"
+                },
+                "allowDuplicates": {
+                    "type": "boolean"
+                },
+                "serviceUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "StopScanning": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "stopScanning"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "UpdateRssi": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "updateRssi"
+                    ],
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Write": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "write"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "withoutResponse": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "WriteHandle": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "writeHandle"
+                    ],
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "handle": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "withoutResponse": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "WriteValue": {
+            "properties": {
+                "action": {
+                    "enum": [
+                        "writeValue"
+                    ],
+                    "type": "string"
+                },
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "descriptorUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
+

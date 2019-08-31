@@ -1,0 +1,555 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AddressChange": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "addressChange"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Broadcast": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "broadcast"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CharacteristicsDiscover": {
+            "properties": {
+                "characteristics": {
+                    "items": {
+                        "$ref": "#/definitions/DiscoveredCharacteristic"
+                    },
+                    "type": "array"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "characteristicsDiscover"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Connect": {
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "connect"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DescriptorsDiscover": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "descriptors": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "descriptorsDiscover"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Disconnect": {
+            "properties": {
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "disconnect"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Discover": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "addressType": {
+                    "type": "string"
+                },
+                "advertisement": {
+                    "$ref": "#/definitions/DiscoverAdvertisement"
+                },
+                "connectable": {
+                    "type": "boolean"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "rssi": {
+                    "type": "number"
+                },
+                "type": {
+                    "enum": [
+                        "discover"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoverAdvertisement": {
+            "properties": {
+                "localName": {
+                    "type": "string"
+                },
+                "manufacturerData": {
+                    "type": "string"
+                },
+                "serviceData": {
+                    "items": {
+                        "$ref": "#/definitions/DiscoverAdvertisementServiceData"
+                    },
+                    "type": "array"
+                },
+                "serviceUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "txPowerLevel": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoverAdvertisementServiceData": {
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DiscoveredCharacteristic": {
+            "properties": {
+                "properties": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Event": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/StateChange"
+                },
+                {
+                    "$ref": "#/definitions/AddressChange"
+                },
+                {
+                    "$ref": "#/definitions/ScanStart"
+                },
+                {
+                    "$ref": "#/definitions/ScanStop"
+                },
+                {
+                    "$ref": "#/definitions/Connect"
+                },
+                {
+                    "$ref": "#/definitions/Disconnect"
+                },
+                {
+                    "$ref": "#/definitions/RssiUpdate"
+                },
+                {
+                    "$ref": "#/definitions/IncludedServicesDiscover"
+                },
+                {
+                    "$ref": "#/definitions/Read"
+                },
+                {
+                    "$ref": "#/definitions/Write"
+                },
+                {
+                    "$ref": "#/definitions/Broadcast"
+                },
+                {
+                    "$ref": "#/definitions/Notify"
+                },
+                {
+                    "$ref": "#/definitions/ValueRead"
+                },
+                {
+                    "$ref": "#/definitions/ValueWrite"
+                },
+                {
+                    "$ref": "#/definitions/DescriptorsDiscover"
+                },
+                {
+                    "$ref": "#/definitions/CharacteristicsDiscover"
+                },
+                {
+                    "$ref": "#/definitions/ServicesDiscover"
+                },
+                {
+                    "$ref": "#/definitions/HandleRead"
+                },
+                {
+                    "$ref": "#/definitions/HandleWrite"
+                },
+                {
+                    "$ref": "#/definitions/HandleNotify"
+                },
+                {
+                    "$ref": "#/definitions/Discover"
+                }
+            ]
+        },
+        "HandleNotify": {
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "handle": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "handleNotify"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "HandleRead": {
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "handle": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "handleRead"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "HandleWrite": {
+            "properties": {
+                "handle": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "handleWrite"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "IncludedServicesDiscover": {
+            "properties": {
+                "includedServiceUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "includedServicesDiscover"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Notify": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "notify"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Read": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "isNotification": {
+                    "type": "boolean"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "read"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RssiUpdate": {
+            "properties": {
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "rssi": {
+                    "type": "number"
+                },
+                "type": {
+                    "enum": [
+                        "rssiUpdate"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ScanStart": {
+            "properties": {
+                "filterDuplicates": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "scanStart"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ScanStop": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "scanStop"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ServicesDiscover": {
+            "properties": {
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "servicesDiscover"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "State": {
+            "enum": [
+                "poweredOff",
+                "poweredOn",
+                "resetting",
+                "unauthorized",
+                "unknown",
+                "unsupported"
+            ],
+            "type": "string"
+        },
+        "StateChange": {
+            "properties": {
+                "state": {
+                    "$ref": "#/definitions/State"
+                },
+                "type": {
+                    "enum": [
+                        "stateChange"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ValueRead": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                },
+                "descriptorUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "valueRead"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ValueWrite": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "descriptorUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "valueWrite"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Write": {
+            "properties": {
+                "characteristicUuid": {
+                    "type": "string"
+                },
+                "peripheralUuid": {
+                    "type": "string"
+                },
+                "serviceUuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "write"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
+
