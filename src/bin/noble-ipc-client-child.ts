@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Client } from '../lib/client'
 import { ClientCodecChild } from '../lib/client-codec-child'
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Client } from '../lib/client'
 import { ClientCodecStdio } from '../lib/client-codec-stdio'
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import noble from '@abandonware/noble'
 
 import { NobleLike } from '../lib/noble-like'
