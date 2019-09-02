@@ -19,6 +19,8 @@ export interface Bindings {
     writeValue(peripheralUuid: string, serviceUuid: string, characteristicUuid: string, descriptorUuid: string, data: Buffer): void
     readHandle(peripheralUuid: string, handle: Buffer): void
     writeHandle(peripheralUuid: string, handle: Buffer, data: Buffer, withoutResponse: boolean): void
+    ping(data: Buffer): void
+    stop(): void
 
     on(event: 'stateChange', listener: (state: ev.State) => void): this
     on(event: 'addressChange', listener: (address: string) => void): this
@@ -87,6 +89,8 @@ export interface Bindings {
     on(event: 'handleRead', listener: (peripheralUuid: string, handle: Buffer, data: Buffer) => void): this
     on(event: 'handleWrite', listener: (peripheralUuid: string, handle: Buffer) => void): this
     on(event: 'handleNotify', listener: (peripheralUuid: string, handle: Buffer, data: Buffer) => void): this
+    on(event: 'pong', listener: (data: Buffer) => void): this
+    on(event: 'stop', listener: () => void): this
 
     emit(event: 'stateChange', state: ev.State): boolean
     emit(event: 'addressChange', address: string): boolean
@@ -153,4 +157,6 @@ export interface Bindings {
     emit(event: 'handleRead', peripheralUuid: string, handle: Buffer, data: Buffer): boolean
     emit(event: 'handleWrite', peripheralUuid: string, handle: Buffer): boolean
     emit(event: 'handleNotify', peripheralUuid: string, handle: Buffer, data: Buffer): boolean
+    emit(event: 'pong', data: Buffer): boolean
+    emit(event: 'stop'): boolean
 }

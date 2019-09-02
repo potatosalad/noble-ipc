@@ -154,6 +154,23 @@ export function createServer(noble: no.NobleLike, codec: ServerCodecLike): Serve
                     )
                     break
                 }
+                case 'ping': {
+                    this.writeEvent({
+                        type: 'pong',
+                        data: command.data,
+                    } as ev.Pong)
+                    break
+                }
+                case 'stop': {
+                    this.writeEvent({
+                        type: 'stop',
+                    } as ev.Stop)
+                    this.emit('end')
+                    process.nextTick(() => {
+                        process.exit(0)
+                    })
+                    break
+                }
                 default:
                     throw Error(`Unhandled command: ${JSON.stringify(command)}`)
             }

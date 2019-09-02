@@ -1,6 +1,6 @@
 {
   "name": "noble-ipc",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Node.js BLE (Bluetooth Low Energy) IPC client and server",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -19,6 +19,9 @@
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
+    "schema": "run-s build schema:*",
+    "schema:command": "typescript-json-schema --strictNullChecks=true --noExtraProps=true --required=true --out=command.schema.json src/lib/command.ts '*'",
+    "schema:event": "typescript-json-schema --strictNullChecks=true --noExtraProps=true --required=true --out=event.schema.json src/lib/event.ts '*'",
     "fix": "run-s fix:prettier && run-s fix:eslint",
     "fix:eslint": "eslint \"src\" --ext .ts,.js --fix",
     "fix:prettier": "prettier \"src/**/*.ts\" --write",

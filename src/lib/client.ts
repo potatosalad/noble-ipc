@@ -202,6 +202,19 @@ export class Client extends events.EventEmitter implements Bindings {
         } as cm.WriteHandle)
     }
 
+    public ping(data: Buffer): void {
+        this.codec.write({
+            action: 'ping',
+            data: data.toString('hex'),
+        } as cm.Ping)
+    }
+
+    public stop(): void {
+        this.codec.write({
+            action: 'stop',
+        } as cm.Stop)
+    }
+
     private readEvent(event: ev.Event): void {
         switch (event.type) {
             case 'stateChange': {
@@ -322,6 +335,14 @@ export class Client extends events.EventEmitter implements Bindings {
             }
             case 'handleNotify': {
                 this.emit('handleNotify', event.peripheralUuid, Buffer.from(event.handle), Buffer.from(event.data, 'hex'))
+                break
+            }
+            case 'pong': {
+                this.emit('pong', Buffer.from(event.data, 'hex'))
+                break
+            }
+            case 'stop': {
+                this.emit('stop')
                 break
             }
             default:

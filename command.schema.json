@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "Broadcast": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -22,9 +23,17 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "broadcast",
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "ChracteristicCommandLike": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -36,6 +45,11 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "Command": {
@@ -90,10 +104,17 @@
                 },
                 {
                     "$ref": "#/definitions/WriteHandle"
+                },
+                {
+                    "$ref": "#/definitions/Ping"
+                },
+                {
+                    "$ref": "#/definitions/Stop"
                 }
             ]
         },
         "Connect": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -105,9 +126,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "peripheralUuid"
+            ],
             "type": "object"
         },
         "DescriptorCommandLike": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -122,9 +148,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "descriptorUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "Disconnect": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -136,9 +169,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "peripheralUuid"
+            ],
             "type": "object"
         },
         "DiscoverCharacteristics": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -159,9 +197,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuids",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "DiscoverDescriptors": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -179,9 +224,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "DiscoverIncludedServices": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -202,9 +254,16 @@
                     "type": "array"
                 }
             },
+            "required": [
+                "action",
+                "peripheralUuid",
+                "serviceUuid",
+                "serviceUuids"
+            ],
             "type": "object"
         },
         "DiscoverServices": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -222,9 +281,15 @@
                     "type": "array"
                 }
             },
+            "required": [
+                "action",
+                "peripheralUuid",
+                "serviceUuids"
+            ],
             "type": "object"
         },
         "Notify": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -245,17 +310,48 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuid",
+                "notify",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "PeripheralCommandLike": {
+            "additionalProperties": false,
             "properties": {
                 "peripheralUuid": {
                     "type": "string"
                 }
             },
+            "required": [
+                "peripheralUuid"
+            ],
+            "type": "object"
+        },
+        "Ping": {
+            "additionalProperties": false,
+            "properties": {
+                "action": {
+                    "enum": [
+                        "ping"
+                    ],
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action",
+                "data"
+            ],
             "type": "object"
         },
         "Read": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -273,9 +369,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "ReadHandle": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -290,9 +393,15 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "handle",
+                "peripheralUuid"
+            ],
             "type": "object"
         },
         "ReadValue": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -313,9 +422,17 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuid",
+                "descriptorUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "ServiceCommandLike": {
+            "additionalProperties": false,
             "properties": {
                 "peripheralUuid": {
                     "type": "string"
@@ -324,9 +441,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         },
         "StartScanning": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -344,9 +466,28 @@
                     "type": "array"
                 }
             },
+            "required": [
+                "action"
+            ],
+            "type": "object"
+        },
+        "Stop": {
+            "additionalProperties": false,
+            "properties": {
+                "action": {
+                    "enum": [
+                        "stop"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action"
+            ],
             "type": "object"
         },
         "StopScanning": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -355,9 +496,13 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action"
+            ],
             "type": "object"
         },
         "UpdateRssi": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -369,9 +514,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "peripheralUuid"
+            ],
             "type": "object"
         },
         "Write": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -395,9 +545,18 @@
                     "type": "boolean"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuid",
+                "data",
+                "peripheralUuid",
+                "serviceUuid",
+                "withoutResponse"
+            ],
             "type": "object"
         },
         "WriteHandle": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -418,9 +577,17 @@
                     "type": "boolean"
                 }
             },
+            "required": [
+                "action",
+                "data",
+                "handle",
+                "peripheralUuid",
+                "withoutResponse"
+            ],
             "type": "object"
         },
         "WriteValue": {
+            "additionalProperties": false,
             "properties": {
                 "action": {
                     "enum": [
@@ -444,6 +611,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "action",
+                "characteristicUuid",
+                "data",
+                "descriptorUuid",
+                "peripheralUuid",
+                "serviceUuid"
+            ],
             "type": "object"
         }
     }

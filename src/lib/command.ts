@@ -113,6 +113,15 @@ export interface WriteHandle {
     readonly withoutResponse: boolean
 }
 
+export interface Ping {
+    readonly action: 'ping'
+    readonly data: string
+}
+
+export interface Stop {
+    readonly action: 'stop'
+}
+
 export type Command =
     | StartScanning
     | StopScanning
@@ -131,6 +140,8 @@ export type Command =
     | WriteValue
     | ReadHandle
     | WriteHandle
+    | Ping
+    | Stop
 
 export interface PeripheralCommandLike {
     readonly peripheralUuid: string

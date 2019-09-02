@@ -161,6 +161,15 @@ export interface Discover {
     readonly rssi: number
 }
 
+export interface Pong {
+    readonly type: 'pong'
+    readonly data: string
+}
+
+export interface Stop {
+    readonly type: 'stop'
+}
+
 export type Event =
     | StateChange
     | AddressChange
@@ -183,3 +192,5 @@ export type Event =
     | HandleWrite
     | HandleNotify
     | Discover
+    | Pong
+    | Stop

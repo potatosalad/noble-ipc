@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "AddressChange": {
+            "additionalProperties": false,
             "properties": {
                 "address": {
                     "type": "string"
@@ -13,9 +14,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "address",
+                "type"
+            ],
             "type": "object"
         },
         "Broadcast": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -36,9 +42,17 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid",
+                "state",
+                "type"
+            ],
             "type": "object"
         },
         "CharacteristicsDiscover": {
+            "additionalProperties": false,
             "properties": {
                 "characteristics": {
                     "items": {
@@ -59,9 +73,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristics",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         },
         "Connect": {
+            "additionalProperties": false,
             "properties": {
                 "error": {
                     "type": "string"
@@ -76,9 +97,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "peripheralUuid",
+                "type"
+            ],
             "type": "object"
         },
         "DescriptorsDiscover": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -102,9 +128,17 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "descriptors",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         },
         "Disconnect": {
+            "additionalProperties": false,
             "properties": {
                 "peripheralUuid": {
                     "type": "string"
@@ -116,9 +150,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "peripheralUuid",
+                "type"
+            ],
             "type": "object"
         },
         "Discover": {
+            "additionalProperties": false,
             "properties": {
                 "address": {
                     "type": "string"
@@ -145,21 +184,41 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "address",
+                "addressType",
+                "advertisement",
+                "connectable",
+                "peripheralUuid",
+                "rssi",
+                "type"
+            ],
             "type": "object"
         },
         "DiscoverAdvertisement": {
+            "additionalProperties": false,
             "properties": {
                 "localName": {
                     "type": "string"
                 },
                 "manufacturerData": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "serviceData": {
-                    "items": {
-                        "$ref": "#/definitions/DiscoverAdvertisementServiceData"
-                    },
-                    "type": "array"
+                    "anyOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/DiscoverAdvertisementServiceData"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "serviceUuids": {
                     "items": {
@@ -171,9 +230,17 @@
                     "type": "number"
                 }
             },
+            "required": [
+                "localName",
+                "manufacturerData",
+                "serviceData",
+                "serviceUuids",
+                "txPowerLevel"
+            ],
             "type": "object"
         },
         "DiscoverAdvertisementServiceData": {
+            "additionalProperties": false,
             "properties": {
                 "data": {
                     "type": "string"
@@ -182,9 +249,14 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "data",
+                "uuid"
+            ],
             "type": "object"
         },
         "DiscoveredCharacteristic": {
+            "additionalProperties": false,
             "properties": {
                 "properties": {
                     "items": {
@@ -196,6 +268,10 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "properties",
+                "uuid"
+            ],
             "type": "object"
         },
         "Event": {
@@ -262,10 +338,17 @@
                 },
                 {
                     "$ref": "#/definitions/Discover"
+                },
+                {
+                    "$ref": "#/definitions/Pong"
+                },
+                {
+                    "$ref": "#/definitions/Stop"
                 }
             ]
         },
         "HandleNotify": {
+            "additionalProperties": false,
             "properties": {
                 "data": {
                     "type": "string"
@@ -283,9 +366,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "data",
+                "handle",
+                "peripheralUuid",
+                "type"
+            ],
             "type": "object"
         },
         "HandleRead": {
+            "additionalProperties": false,
             "properties": {
                 "data": {
                     "type": "string"
@@ -303,9 +393,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "data",
+                "handle",
+                "peripheralUuid",
+                "type"
+            ],
             "type": "object"
         },
         "HandleWrite": {
+            "additionalProperties": false,
             "properties": {
                 "handle": {
                     "type": "string"
@@ -320,9 +417,15 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "handle",
+                "peripheralUuid",
+                "type"
+            ],
             "type": "object"
         },
         "IncludedServicesDiscover": {
+            "additionalProperties": false,
             "properties": {
                 "includedServiceUuids": {
                     "items": {
@@ -343,9 +446,16 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "includedServiceUuids",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         },
         "Notify": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -366,9 +476,36 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid",
+                "state",
+                "type"
+            ],
+            "type": "object"
+        },
+        "Pong": {
+            "additionalProperties": false,
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "pong"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data",
+                "type"
+            ],
             "type": "object"
         },
         "Read": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -392,9 +529,18 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "data",
+                "isNotification",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         },
         "RssiUpdate": {
+            "additionalProperties": false,
             "properties": {
                 "peripheralUuid": {
                     "type": "string"
@@ -409,9 +555,15 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "peripheralUuid",
+                "rssi",
+                "type"
+            ],
             "type": "object"
         },
         "ScanStart": {
+            "additionalProperties": false,
             "properties": {
                 "filterDuplicates": {
                     "type": "boolean"
@@ -423,9 +575,13 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "type"
+            ],
             "type": "object"
         },
         "ScanStop": {
+            "additionalProperties": false,
             "properties": {
                 "type": {
                     "enum": [
@@ -434,9 +590,13 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "type"
+            ],
             "type": "object"
         },
         "ServicesDiscover": {
+            "additionalProperties": false,
             "properties": {
                 "peripheralUuid": {
                     "type": "string"
@@ -454,6 +614,11 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "peripheralUuid",
+                "serviceUuids",
+                "type"
+            ],
             "type": "object"
         },
         "State": {
@@ -468,6 +633,7 @@
             "type": "string"
         },
         "StateChange": {
+            "additionalProperties": false,
             "properties": {
                 "state": {
                     "$ref": "#/definitions/State"
@@ -479,9 +645,29 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "state",
+                "type"
+            ],
+            "type": "object"
+        },
+        "Stop": {
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "enum": [
+                        "stop"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
             "type": "object"
         },
         "ValueRead": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -505,9 +691,18 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "data",
+                "descriptorUuid",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         },
         "ValueWrite": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -528,9 +723,17 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "descriptorUuid",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         },
         "Write": {
+            "additionalProperties": false,
             "properties": {
                 "characteristicUuid": {
                     "type": "string"
@@ -548,6 +751,12 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "characteristicUuid",
+                "peripheralUuid",
+                "serviceUuid",
+                "type"
+            ],
             "type": "object"
         }
     }
