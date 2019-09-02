@@ -21,6 +21,84 @@ export interface ServerLike extends events.EventEmitter {
     removeListener(event: string, listener: Function): this
 }
 
+function coerceArray<T>(value: any, transform: (element: any) => T): T[] {
+    if (typeof value === 'object') {
+        return Array.from(value).map(transform) as T[]
+    } else {
+        throw TypeError(`Expected value to be an array. Was: ${JSON.stringify(value)}`)
+    }
+}
+
+function coerceBoolean(value: any): boolean {
+    if (value === true || value === 'true' || value === 1) {
+        return true
+    } else if (value === false || value === 'false' || value === 0) {
+        return false
+    } else {
+        throw TypeError(`Expected value to be a boolean. Was: ${JSON.stringify(value)}`)
+    }
+}
+
+function coerceNumber(value: any): number {
+    if (typeof value === 'number' && !isNaN(value)) {
+        return value
+    } else if (typeof value === 'string') {
+        let number: number | null = null
+        try {
+            number = parseInt(value)
+        } catch (_error) {
+            number = null
+        }
+        if (typeof number === 'number' && !isNaN(number)) {
+            return number
+        }
+    }
+    throw TypeError(`Expected value to be a number. Was: ${JSON.stringify(value)}`)
+}
+
+function coerceNumberOrNull(value: any): number | null {
+    if (typeof value === 'number' || value === null) {
+        return value
+    } else if (typeof value === 'string') {
+        let number: number | null = null
+        try {
+            number = parseInt(value)
+        } catch (_error) {
+            number = null
+        }
+        if (typeof number === 'number' && isNaN(number)) {
+            number = null
+        }
+        return number
+    } else if (typeof value === 'undefined') {
+        return null
+    } else {
+        throw TypeError(`Expected value to be number, null, or undefined. Was: ${JSON.stringify(value)}`)
+    }
+}
+
+function coerceString(value: any): string {
+    if (typeof value === 'string') {
+        return value
+    } else if (typeof value !== 'undefined' && typeof value.toString === 'function') {
+        return value.toString()
+    } else {
+        throw TypeError(`Expected value to be string or have toString() function. Was: ${JSON.stringify(value)}`)
+    }
+}
+
+function coerceStringOrNull(value: any): string | null {
+    if (typeof value === 'string' || value === null) {
+        return value
+    } else if (typeof value !== 'undefined' && typeof value.toString === 'function') {
+        return value.toString()
+    } else if (typeof value === 'undefined') {
+        return null
+    } else {
+        throw TypeError(`Expected value to be string, null, or undefined. Was: ${JSON.stringify(value)}`)
+    }
+}
+
 export function createServer(noble: no.NobleLike, codec: ServerCodecLike): ServerLike {
     const startScanningCommands = new WeakMap<Server, cm.StartScanning>()
 
@@ -502,22 +580,29 @@ export function createServer(noble: no.NobleLike, codec: ServerCodecLike): Serve
             })
             server.writeEvent({
                 type: 'discover',
-                peripheralUuid: peripheral.uuid,
-                address: peripheral.address,
-                addressType: peripheral.addressType,
-                connectable: peripheral.connectable,
+                peripheralUuid: coerceString(peripheral.uuid),
+                address: coerceString(peripheral.address),
+                addressType: coerceString(peripheral.addressType),
+                connectable: coerceBoolean(peripheral.connectable),
                 advertisement: {
-                    localName: peripheral.advertisement.localName,
-                    txPowerLevel: peripheral.advertisement.txPowerLevel,
-                    serviceUuids: peripheral.advertisement.serviceUuids,
+                    localName: coerceStringOrNull(peripheral.advertisement.localName),
+                    txPowerLevel: coerceNumberOrNull(peripheral.advertisement.txPowerLevel),
+                    serviceUuids: peripheral.advertisement.serviceUuids
+                        ? coerceArray(peripheral.advertisement.serviceUuids, coerceString)
+                        : null,
                     manufacturerData: peripheral.advertisement.manufacturerData
                         ? peripheral.advertisement.manufacturerData.toString('hex')
                         : null,
                     serviceData: peripheral.advertisement.serviceData
-                        ? peripheral.advertisement.serviceData.map(({ uuid, data }) => ({ uuid, data: data.toString('hex') }))
+                        ? peripheral.advertisement.serviceData.map((serviceData) => {
+                              return {
+                                  uuid: coerceString(serviceData.uuid),
+                                  data: serviceData.data.toString('hex'),
+                              }
+                          })
                         : null,
                 } as ev.DiscoverAdvertisement,
-                rssi: peripheral.rssi,
+                rssi: coerceNumber(peripheral.rssi),
             } as ev.Discover)
         }
     }

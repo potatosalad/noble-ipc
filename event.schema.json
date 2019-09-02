@@ -199,7 +199,10 @@
             "additionalProperties": false,
             "properties": {
                 "localName": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "manufacturerData": {
                     "type": [
@@ -221,13 +224,23 @@
                     ]
                 },
                 "serviceUuids": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "txPowerLevel": {
-                    "type": "number"
+                    "type": [
+                        "null",
+                        "number"
+                    ]
                 }
             },
             "required": [

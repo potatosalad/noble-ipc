@@ -144,9 +144,9 @@ export interface DiscoverAdvertisementServiceData {
 }
 
 export interface DiscoverAdvertisement {
-    readonly localName: string
-    readonly txPowerLevel: number
-    readonly serviceUuids: readonly string[]
+    readonly localName: string | null
+    readonly txPowerLevel: number | null
+    readonly serviceUuids: readonly string[] | null
     readonly manufacturerData: string | null
     readonly serviceData: readonly DiscoverAdvertisementServiceData[] | null
 }
