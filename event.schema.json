@@ -33,7 +33,10 @@
                     "type": "string"
                 },
                 "state": {
-                    "type": "string"
+                    "type": [
+                        "string",
+                        "boolean"
+                    ]
                 },
                 "type": {
                     "enum": [
@@ -480,7 +483,10 @@
                     "type": "string"
                 },
                 "state": {
-                    "type": "string"
+                    "type": [
+                        "string",
+                        "boolean"
+                    ]
                 },
                 "type": {
                     "enum": [

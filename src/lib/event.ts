@@ -64,7 +64,7 @@ export interface Broadcast {
     readonly peripheralUuid: string
     readonly serviceUuid: string
     readonly characteristicUuid: string
-    readonly state: string
+    readonly state: string | boolean
 }
 
 export interface Notify {
@@ -72,7 +72,7 @@ export interface Notify {
     readonly peripheralUuid: string
     readonly serviceUuid: string
     readonly characteristicUuid: string
-    readonly state: string
+    readonly state: string | boolean
 }
 
 export interface ValueRead {
